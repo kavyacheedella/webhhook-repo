@@ -30,16 +30,24 @@ def github_webhook():
         to_branch = data["ref"].split("/")[-1]
         commit_id = data["head_commit"]["id"]
 
+        files = []
+
+        # collect files from commits
+        for commit in data["commits"]:
+            files.extend(commit.get("added", []))
+            files.extend(commit.get("modified", []))
+            files.extend(commit.get("removed", []))
+
         event_data = {
             "request_id": commit_id,
             "author": author,
             "action": "PUSH",
             "from_branch": "",
             "to_branch": to_branch,
+            "files": files,
             "timestamp": datetime.utcnow()
         }
 
-        # prevent duplicates
         existing = events_collection.find_one({"request_id": commit_id})
 
         if not existing:
@@ -54,7 +62,6 @@ def github_webhook():
         to_branch = data["pull_request"]["base"]["ref"]
         pr_id = str(data["pull_request"]["id"])
 
-        # check if merged
         if data["pull_request"]["merged"]:
             action = "MERGE"
         else:
@@ -69,7 +76,6 @@ def github_webhook():
             "timestamp": datetime.utcnow()
         }
 
-        # prevent duplicates
         existing = events_collection.find_one({"request_id": pr_id})
 
         if not existing:

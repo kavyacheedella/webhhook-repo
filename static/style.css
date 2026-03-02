@@ -1,8 +1,4 @@
 body{
-    background:red;
-}
-
-body{
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg,#eef2ff,#f8fafc);
     margin:0;
@@ -11,7 +7,7 @@ body{
     justify-content:center;
 }
 
-/* main container card */
+/* main container */
 
 .container{
     background:white;
@@ -29,7 +25,7 @@ h2{
     margin-bottom:25px;
 }
 
-/* timeline list */
+/* timeline */
 
 ul{
     list-style:none;
@@ -37,8 +33,6 @@ ul{
     margin:0;
     position:relative;
 }
-
-/* vertical timeline line */
 
 ul::before{
     content:"";
@@ -58,9 +52,6 @@ li{
     padding:14px 16px 14px 50px;
     margin:12px 0;
     border-radius:8px;
-    display:flex;
-    align-items:center;
-    gap:10px;
     border:1px solid #eef1f5;
     transition:all 0.25s ease;
 }
@@ -78,7 +69,7 @@ li::before{
     border:3px solid white;
 }
 
-/* hover animation */
+/* hover */
 
 li:hover{
     transform:translateY(-2px);
@@ -86,7 +77,16 @@ li:hover{
     background:#eef2ff;
 }
 
-/* event badges */
+/* event header */
+
+.event-header{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:5px;
+}
+
+/* badges */
 
 .badge{
     padding:4px 8px;
@@ -94,10 +94,7 @@ li:hover{
     border-radius:5px;
     color:white;
     font-weight:bold;
-    letter-spacing:0.5px;
 }
-
-/* badge colors */
 
 .push{
     background:#22c55e;
@@ -111,8 +108,15 @@ li:hover{
     background:#3b82f6;
 }
 
-/* optional icon spacing */
+/* files list under push */
 
-.icon{
-    font-size:16px;
+.files{
+    margin-top:8px;
+    margin-left:10px;
+    font-size:13px;
+    color:#555;
+}
+
+.file-item{
+    margin:2px 0;
 }

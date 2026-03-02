@@ -9,37 +9,78 @@ async function loadEvents() {
   data.forEach((event) => {
     const item = document.createElement("li");
 
+    /* event header */
+    const header = document.createElement("div");
+    header.classList.add("event-header");
+
     const badge = document.createElement("span");
     badge.classList.add("badge");
 
-    let text = "";
+    const message = document.createElement("span");
+
     const date = new Date(event.timestamp).toUTCString();
+
+    /* PUSH EVENT */
 
     if (event.action === "PUSH") {
       badge.classList.add("push");
       badge.textContent = "PUSH";
-      text = `${event.author} pushed to ${event.to_branch} on ${date}`;
+
+      message.textContent = `${event.author} pushed to ${event.to_branch} on ${date}`;
+
+      header.appendChild(badge);
+      header.appendChild(message);
+
+      item.appendChild(header);
+
+      /* show files pushed */
+
+      if (event.files && event.files.length > 0) {
+        const filesContainer = document.createElement("div");
+        filesContainer.classList.add("files");
+
+        event.files.forEach((file) => {
+          const fileItem = document.createElement("div");
+          fileItem.classList.add("file-item");
+          fileItem.textContent = "• " + file;
+
+          filesContainer.appendChild(fileItem);
+        });
+
+        item.appendChild(filesContainer);
+      }
     } else if (event.action === "PULL_REQUEST") {
+
+    /* PULL REQUEST EVENT */
       badge.classList.add("pr");
       badge.textContent = "PR";
-      text = `${event.author} submitted a pull request from ${event.from_branch} to ${event.to_branch} on ${date}`;
+
+      message.textContent = `${event.author} submitted a pull request from ${event.from_branch} to ${event.to_branch} on ${date}`;
+
+      header.appendChild(badge);
+      header.appendChild(message);
+
+      item.appendChild(header);
     } else if (event.action === "MERGE") {
+
+    /* MERGE EVENT */
       badge.classList.add("merge");
       badge.textContent = "MERGE";
-      text = `${event.author} merged branch ${event.from_branch} to ${event.to_branch} on ${date}`;
+
+      message.textContent = `${event.author} merged branch ${event.from_branch} to ${event.to_branch} on ${date}`;
+
+      header.appendChild(badge);
+      header.appendChild(message);
+
+      item.appendChild(header);
     }
-
-    const message = document.createElement("span");
-    message.textContent = text;
-
-    item.appendChild(badge);
-    item.appendChild(document.createTextNode(" "));
-    item.appendChild(message);
 
     list.appendChild(item);
   });
 }
 
 loadEvents();
+
+/* refresh every 15 seconds */
 
 setInterval(loadEvents, 15000);
