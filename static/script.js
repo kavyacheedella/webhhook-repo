@@ -33,6 +33,7 @@ async function loadEvents() {
     message.textContent = text;
 
     item.appendChild(badge);
+    item.appendChild(document.createTextNode(" "));
     item.appendChild(message);
 
     list.appendChild(item);
