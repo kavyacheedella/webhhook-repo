@@ -1,0 +1,66 @@
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6fb;
+    margin:0;
+    padding:40px;
+    display:flex;
+    justify-content:center;
+}
+
+.container{
+    background:white;
+    width:520px;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+    color:#333;
+    margin-bottom:20px;
+}
+
+ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+li{
+    background:#f9fafc;
+    padding:12px 15px;
+    margin:10px 0;
+    border-radius:6px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    transition:all 0.2s ease;
+}
+
+li:hover{
+    transform:translateX(4px);
+    background:#eef2ff;
+}
+
+/* badges */
+
+.badge{
+    padding:4px 8px;
+    font-size:12px;
+    border-radius:4px;
+    color:white;
+    font-weight:bold;
+}
+
+.push{
+    background:#4caf50;
+}
+
+.pr{
+    background:#ff9800;
+}
+
+.merge{
+    background:#2196f3;
+}
